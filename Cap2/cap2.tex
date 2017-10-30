@@ -1,0 +1,87 @@
+\section{Notação Musical}
+
+[TODO: mover para outra seção: Representação Musical (ou algo similar)]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arquivos MIDI}
+
+[TODO: mover para outra seção: Representação Musical (ou algo similar)]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Entropia}
+
+[ Falar sobre um pouco sobre processo estocástico ]
+
+Entropia da informação é definida como a quantidade de informação produzida por um processo estocástico. É a grandeza que procura medir a incerteza ou a taxa na qual informação é gerada ou transmitida.
+
+Considerando um evento $X$ que pode assumir os valores ${x_1, x_2, ..., x_n}$, onde se conhece a probabilidade $P(x_i)$ para cada valor, pretende-se medir quanta informação é transmitida por cada valor. Para isso, deve-se encontrar uma função $H(X)$ com as seguintes propriedades \cite{shannon}:
+
+\begin{itemize}
+    \item $H$ deve ser contínua em X;
+    \item Se $P(x_i)$ é igual para todo $i$, isto é, $P(x_i) = \frac{1}{n}$, então $H$ deve ser monótona crescente em $n$, isto é, para escolhas equiprováveis, quanto mais valores possíveis maior é a incerteza associada;
+    \item Se uma escolha pode ser dividida em duas escolhas sucessivas, o valor de $H$ deve ser igual a soma ponderada dos valores individuais de $H$. 
+\end{itemize}
+
+A função $H$, entropia de X, que satisfaz as propriedades é \cite{shannon}:
+
+\begin{equation}
+    H(X) = - K \sum_{i=1}^{n} P_X(x_i) \log_b{[P_X(x_i)]}
+\end{equation}
+$K$ é uma constante positiva que define a unidade. Será usado o valor $K=1$ aqui em diante. Será utilizado, também, $b=2$. Assim, temos o resultado em bits.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Informação Mútua}
+
+É possivel, também, que estude a variável $X$ condicionalmente a outra variável aleatória $Y$. Assim, pode-se calcular a Entropia de $X$ quando se conhece $Y$:
+
+\begin{equation}
+    H(X|Y) =  \sum_{j=1}^{m} P_Y(y_i) H(X|Y = y_i)}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modelo}
+
+Uma composição musical, ou uma de suas vozes, pode ser observadas como uma sequência de notas, acodes e / ou pausas com uma duração associada. Assim, pode-se modelar cada instante da música como duas variáveis aleatórias: note / acorde / pausa e duração.
+
+Ao realizar o pré-processamento da composição, foram feitas umas considerações:
+
+
+\subsection{Transposição}
+
+As composições musicais podem ser escritas em escalas diferentes, isto é, em uma escala baseada em uma tônica diferente. Pode-se transpor uma composição, isto é, mover todas suas notas para cima ou para baixo com um intervalo constante e teremos a mesma composição em outra escala, que transmite a mesma informação que a original.
+
+Para que se possa analisar composições em diferentes escalas com o mesmo olhar, foi considerado não a nota em si mas a sua relação (distância) com a tônica da escala em que a composição foi escrita. O mapeamento feito está exmplificado na figura \ref{fig:transpose}
+
+[
+
+TODO: Figura exemplificando a transposição
+
+Em Dó (C): C vira 1, C\# vira 2, D vira 3, etc
+
+Em Ré (D): D vira 1, D\# vira 2, E vira 3, etc
+
+Pausa vira 0
+
+]
+
+\subsection{Modo}
+
+Outro fator a se considerar o modo das escalas, que pode ser maior, menor, dentre outros. Nesse trabalho, foram considerados os modos maior e menor apenas. A separação aqui é feita pois há uma diferença entre o significado de uma sequência de notas em uma escala devido ao seu modo, por exemplo, a sequência $C$,$E$, $G$ representa coisas diferntes nas escalas de Dó Maior ou Dó Menor.
+
+\subsection{Altura da nota}
+
+A nota observada em escalas diferentes foi tratada com o mesmo valor, por exemplo, a nota Dó foi tratada com o mesmo valor se está na primeira oitava ($C1$) ou na quarta oitava ($C4$). Isto vale, também, para os acordes; por exemplo: o acorde ($C3$ $E3$ $G4$) é interpretado como ($C$ $E$ $G$) e o acorde ($C3$ $E3$ $C4$) é interpretado como ($C$ $E$).
+
+\subsection{Função probabilidade}
+
+A função probabilidade $P(x_i)$ onde $x_i$ é um evento (nota, acorde ou pausa) com seu valor em relação à tônica, foi obtida experimentalmente, com a análise de frequência de diversas composições do mesmo autor. Foram obtidas duas funções de probabilidade: uma para a escala maior e outra para a escala menor.
+
+\subsection{Duração}
+
+A duração dos eventos foi tratada como uma variável aleatória independente do evento. A função de probabilidade também foi obtida através da análise de frequência.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Método de Análise}
