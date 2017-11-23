@@ -1,11 +1,12 @@
 \section{Notação Musical}
 
-[TODO: mover para outra seção: Representação Musical (ou algo similar)]
+Para este trabalho será necessário que um conhecimento prévio de teoria e notação musical moderna. O conhecimento básico necessário para o entendimento do que será exposto a seguir está no TODO: apêndice 1.
+Digitalmente, as composições podem ser representadas pelo padrão MIDI.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Arquivos MIDI}
 
-[ TODO: mover para outra seção: Representação Musical (ou algo similar)]
+[ TODO: ]
 
 
 
@@ -46,41 +47,60 @@ $K$ é uma constante positiva que define a unidade. Será usado o valor $K=1$ aq
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Modelo}
 
-Uma composição musical, ou uma de suas vozes, pode ser observadas como uma sequência de notas, acodes e / ou pausas com uma duração associada. Assim, pode-se modelar cada instante da música como duas variáveis aleatórias: note / acorde / pausa e duração.
+Uma composição musical, ou uma de suas vozes, pode ser observada como uma sequência de notas, acodes e / ou pausas com uma duração associada. Assim, pode-se modelar cada instante da música como duas variáveis aleatórias:
 
-Ao realizar o pré-processamento da composição, foram feitas umas considerações:
+\begin{enumerate}
+    \item Nota, Acorde ou Pausa
+    \item Duração
+\end{enumerate}
 
+Ao realizar o pré-processamento da composição, foram feitas algumas considerações:
 
-\subsection{Transposição}
+\subsection{Extração da Melodia}
 
-As composições musicais podem ser escritas em escalas diferentes, isto é, em uma escala baseada em uma tônica diferente. Pode-se transpor uma composição, isto é, mover todas suas notas para cima ou para baixo com um intervalo constante e teremos a mesma composição em outra escala, que transmite a mesma informação que a original.
+Tanto as composições musicais mais clássicas como as mais modernas apresentam diversos instrumentos ou vozes simultaneamente. Dentre as mais clássicas, as mais simples apresentam duas sequências principais:
 
-Para que se possa analisar composições em diferentes escalas com o mesmo olhar, foi considerado não a nota em si mas a sua relação (distância) com a tônica da escala em que a composição foi escrita. O mapeamento feito está exmplificado na figura \ref{fig:transpose}
+\begin{itemize}
+    \item Base
+    \item Melodia
+\end{itemize}
 
-[
+No caso de composições mais modernas, há a presença de vários instrumentos musicais, dentre eles:
 
-TODO: Figura exemplificando a transposição
+\begin{itemize}
+    \item Voz
+    \item Guitarra
+    \item Violão
+    \item Piano
+    \item Contrabaixo
+    \item Bateria / Percussão
+\end{itemize}
 
-Em Dó (C): C vira 1, C\# vira 2, D vira 3, etc
+Para propósitos deste trabalho, foi feita a extração apenas da sequência principal, ou melodia, de cada uma das composições utilizadas. Essa extração foi feita utilizando o software MuseScore \cite{musescore}, que permite a vizualização de arquivos MIDI em formato mais amigável para um humano, assim como edição dos mesmos.
 
-Em Ré (D): D vira 1, D\# vira 2, E vira 3, etc
+% \subsection{Modo}
 
-Pausa vira 0
+% Outro fator a se considerar o modo das escalas, que pode ser maior, menor, dentre outros. Nesse trabalho, foram considerados os modos maior e menor apenas. A separação aqui é feita pois há uma diferença entre o significado de uma sequência de notas em uma escala devido ao seu modo, por exemplo, a sequência $C$,$E$, $G$ representa coisas diferntes nas escalas de Dó Maior ou Dó Menor.
 
-]
+\subsection{Altura da nota}\label{section:altura_da_nota}
 
-\subsection{Modo}
+As notas de mesmo nome observadas em escalas diferentes foram tratadas com o mesmo valor, por exemplo, a nota Dó foi tratada com o mesmo valor se está na primeira oitava ($C_1$) ou na quarta oitava ($C_4$). Isto deve-se ao fato de que, em uma mesma escala, as notas de mesmo nome em oitavas diferentes carregam, muitas vezes, a mesma informação.
 
-Outro fator a se considerar o modo das escalas, que pode ser maior, menor, dentre outros. Nesse trabalho, foram considerados os modos maior e menor apenas. A separação aqui é feita pois há uma diferença entre o significado de uma sequência de notas em uma escala devido ao seu modo, por exemplo, a sequência $C$,$E$, $G$ representa coisas diferntes nas escalas de Dó Maior ou Dó Menor.
+\subsection{Acordes}
 
-\subsection{Altura da nota}
+Para os acordes, foi tomada duas abordagens diferentes:
 
-A nota observada em escalas diferentes foi tratada com o mesmo valor, por exemplo, a nota Dó foi tratada com o mesmo valor se está na primeira oitava ($C1$) ou na quarta oitava ($C4$). Isto vale, também, para os acordes; por exemplo: o acorde ($C3$ $E3$ $G4$) é interpretado como ($C$ $E$ $G$) e o acorde ($C3$ $E3$ $C4$) é interpretado como ($C$ $E$).
+\begin{enumerate}
+    \item Considerar um acorde como um evento próprio, após o devido tratamento que consiste em simplificar as notas em oitavas diferentes, como foi explicitado em \ref{section:altura_da_nota}, e também ignorar a repetição de notas iguais, por exemplo, o acorde ($C3$, $E3$, $C4$) é tratado como ($C$, $E$).
+
+    \item Utilizar a Nota fundamental do acorde para representar o evento. Por exemplo, o acorde ($C3$, $E3$, $C4$), nesse caso, é tratado como a nota $C$ sendo tocada individualmente
+\end{enumerate}
+
+As notas de mesmo nome observadas em escalas diferentes foram tratadas com o mesmo valor, por exemplo, a nota Dó foi tratada com o mesmo valor se está na primeira oitava ($C1$) ou na quarta oitava ($C4$). Isto deve-se ao fato de que, em uma mesma escala, as notas de mesmo nome em oitavas diferentes carregam, muitas vezes, a mesma informação.
 
 \subsection{Função probabilidade}
 
-A função probabilidade $P(x_i)$ onde $x_i$ é um evento (nota, acorde ou pausa) com seu valor em relação à tônica, foi obtida experimentalmente, com a análise de frequência de diversas composições do mesmo autor. Foram obtidas duas funções de probabilidade: uma para a escala maior e outra para a escala menor.
-
+Para as análises de entropia é necessário que estabeleçamos a função de distribuição de probabilidade $P(X)$ dos eventos que serão analisar. Esse valor foi obtido experimentalmente através de análise de frequência das composições que foram estudadas.
 \subsection{Duração}
 
 A duração dos eventos foi tratada como uma variável aleatória independente do evento. A função de probabilidade também foi obtida através da análise de frequência.
