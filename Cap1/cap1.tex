@@ -6,35 +6,32 @@ Informação pode ser mensurada, e diversos estudos tem sido feitos na área há
 
 Com a notação musical utilizada há muitos anos, tem-se uma representação da música bem estruturada e discretizada. Há eventos bem definidos, durações, técnicas, etc. Este trabalho utiliza os conceitos estudados por Shannon e outros para tentar medir a quantidade de informação que uma música transmite.
 
+\section{Motivação}
 
+Diversas aplicações proveniente ou relacionadas a músicas necessitam de uma certa identificação de padrões nesta.
 
+Uma delas é a compressão de arquivos digitais. Assim como textos, composições musicais apresentam padrões que as destacam de outras mídias e formatos. Estas características podem ser aproveitadas quando se quer comprimir arquivos digitais, atividade que se resume a representar padrões de forma simplificada a fim de diminuir a quantidade de bytes necessários para representar uma determinada sequêcia de eventos.
 
-    % \begin{figure}[ht]
-    % \centering
-    % \includegraphics[width=0.5\textwidth]{Cap1/cupim}
-    % \caption{Proibido estacionar cupins. Legenda grande, com o objetivo de demonstrar a indentação na lista de figuras.}
-    % \label{cupim}
-    % \end{figure}
+Outra aplicação é a geração automatizada de música. Muito utilizada atualmente em jogos digitais, pode se aproveitar da identificação de padrões em composições existentes.
 
-    
-    % \begin{figure}[ht!]
-    % \centering
-    % \includegraphics[width=1\textwidth]{Cap1/cupimconcreto}
-    % \caption{Exemplo real de cupim frente ao seu dilema.}
-    % \label{FDII}
-    % \end{figure}
-    
-    % \begin{figure}[ht]
-    % \centering
-    % \includegraphics[width=0.5\textwidth]{Cap1/cupim}
-    % \caption{Proibido estacionar cupins. Legenda grande, com o objetivo de demonstrar a indentação na lista de figuras.}
-    % \label{cupim}
-    % \end{figure}
-    
-    % \begin{figure}[ht!]
-    % \centering
-    % \includegraphics[width=1\textwidth]{Cap1/cupimconcreto}
-    % \caption{Exemplo real de cupim frente ao seu dilema.}
-    % \label{FDII}
-    % \end{figure}
+\section{Objetivo}
+
+Este trabalho tem por objetivo a implementação de uma \textit{framework} para extração de padrões e medição da quantidade de informação transmitida por composições musicais.
+
+\section{Abordagem}
+
+O método que foi utilizado nesse trabalho foi tratar as composições de uma forma similar a sinais digitais para que, de tal forma, seja possível definir os eventos a serem observados e modelá-los como processos estocásticos. Alguns estudos semelhantes foram realizados \cite{artigomit}, onde procurou-se estudar padrões de textos e composições músicais.
+
+\section{Organização do Trabalho}
+
+O trabalho está dividido nos capítulos:
+
+\begin{itemize}
+    \item \textbf{Capítulo 1:} introduz o objetivo e abordagem do trabalho;
+    \item \textbf{Capítulo 2:} descreve o modelo teórico utilizado;
+    \item \textbf{Capítulo 3:} descreve a implementação e expõe resultados obtidos;
+    \item \textbf{Capítulo 4:} conclui o trabalho e discute resultados e propostas futuras de continuação;
+    \item \textbf{Apêndice A:} pequena amostra de teoria musical que auxilia no entendimento do exposto no trabalho.
+\end{itemize}
+
     

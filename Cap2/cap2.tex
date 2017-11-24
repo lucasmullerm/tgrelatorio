@@ -7,8 +7,11 @@ Digitalmente, as composições podem ser representadas pelo padrão MIDI.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Arquivos MIDI}
 
-[ TODO: ]
+Trata-se de um padrão que descreve um protocolo de comunicação que permite a representação e execução de instrumentos musicais eletrônicos \cite{midi}. O padrão MIDI é capaz de representar uma composição musical, com seus diversos intrumentos, de forma similar à capacidade da notação moderna da partitura. Nas diversas \textit{tracks} do arquivo, ele armazena todas notas e acordes tocados por um instrumento, assim como a duração de cada evento.
 
+O padrão MIDI representa, em 7 bits, as notas das oitavas $-1$ a $9$, que abrange praticamente toda a extensão do som audível pelo ser-humano.
+
+A existência de softwares que convertem do padrão MIDI para padrões mais amigáveis a humanos permite que as composições musicais sejam transcritas para esse padrão e disponibilizadas facilmente \textit{online}. Estes softwares são chamados de sequenciadores. Dois desses softwares foram utilizados no decorrer deste trabalho: Online Sequencer \cite{sequencer} e MuseScore \cite{musescore}, sendo o segundo mais completo e que permite a rápida transcrição do arquivo MIDI em partitura.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,7 +23,7 @@ Digitalmente, as composições podem ser representadas pelo padrão MIDI.
 \section{Entropia}
 
 
-Entropia da informação é definida como a quantidade de informação produzida por um processo estocástico. É a grandeza que procura medir a incerteza ou a taxa na qual informação é gerada ou transmitida.
+Entropia da informação é definida textcomo a quantidade de informação produzida por um processo estocástico. É a grandeza que procura medir a incerteza ou a taxa na qual informação é gerada ou transmitida.
 
 Considerando um evento $X$ que pode assumir os valores ${x_1, x_2, ..., x_n}$, onde se conhece a probabilidade $P(x_i)$ para cada valor, pretende-se medir quanta informação é transmitida por cada valor. Para isso, deve-se encontrar uma função $H(X)$ com as seguintes propriedades \cite{shannon}:
 
