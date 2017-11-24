@@ -1,6 +1,6 @@
 \section{Notação Musical}
 
-Para este trabalho será necessário que um conhecimento prévio de teoria e notação musical moderna. O conhecimento básico necessário para o entendimento do que será exposto a seguir está no TODO: apêndice 1.
+Para este trabalho será necessário que um conhecimento prévio de teoria e notação musical moderna. O conhecimento básico necessário para o entendimento do que será exposto a seguir está no Apêndice \ref{ape:notacao}.
 Digitalmente, as composições podem ser representadas pelo padrão MIDI.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,10 +29,43 @@ A função $H$, entropia de X, que satisfaz as propriedades é \cite{shannon}:
 
 \begin{equation}
     H(X) = - K \sum_{i=1}^{n} P_X(x_i) \log_b{[P_X(x_i)]}
+\label{eq:entropy}
 \end{equation}
 $K$ é uma constante positiva que define a unidade. Será usado o valor $K=1$ aqui em diante. Será utilizado, também, $b=2$. Assim, temos o resultado em bits.
 
 [ TODO: Falar de propriedades ]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Entropia Condicional}
+
+Pode-se definir Entropia Conjunta de duas variáveis aleatórias $X$ e $Y$ da mesma forma expressa na equação \ref{eq:entropy}, utilizando $(X, Y)$ como uma única variável aleatória vetorial. Já utilizando os valores definidos para $K$ e $b$ temos \cite{livro}:
+
+\begin{equation}
+    H(X) = - \sum_{x \in X}\sum_{y \in Y} P(x_i, y_i) \log_2{P(x_i, y_i)}
+\label{eq:joint_entropy}
+\end{equation}
+
+Esse valor também pode ser representado da seguinte forma \cite{livro}:
+
+\begin{equation}
+    H(X) = - E \log_2{P(X, Y)}
+\end{equation}
+
+A partir desse valor, pode-se calcular o valor da Entropia Condicional \cite{livro}:
+
+\begin{equation}
+    H(Y|X) = - E_{P(X,Y)} \log_2{P(Y|X)}
+\end{equation}
+
+A partir do valor da função de probabilidade conjunta $P(X,Y)$, pode-se calcular o valor da Entropia Condicional através da equação \cite{livro}:
+
+\begin{equation}
+    H(X) = - \sum_{x \in X}\sum_{y \in Y} P(x_i, y_i) \log_2{\frac{P(x_i, y_i)}{P(x_i)}}
+\end{equation}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Informação Mútua}
@@ -101,9 +134,21 @@ As notas de mesmo nome observadas em escalas diferentes foram tratadas com o mes
 \subsection{Função probabilidade}
 
 Para as análises de entropia é necessário que estabeleçamos a função de distribuição de probabilidade $P(X)$ dos eventos que serão analisar. Esse valor foi obtido experimentalmente através de análise de frequência das composições que foram estudadas.
+
+\subsection{Distâncias entre notas consecutivas}
+
+Para a análise com a utilização do evento Distância entre notas consecutivas foram tomadas duas abordagens:
+
+\begin{enumerate}
+    \item Distância entre as duas notas em semitons, equivalente a diferença do valor MIDI para as duas notas.
+    \item Distância entre as duas notas na escala em que a música foi composta.
+\end{enumerate}
+
 \subsection{Duração}
 
-A duração dos eventos foi tratada como uma variável aleatória independente do evento. A função de probabilidade também foi obtida através da análise de frequência.
+A duração dos eventos foi tratada como uma variável aleatória independente do evento. A função de probabilidade também foi obtida através da análise de frequência destes eventos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Método de Análise}
+
+
