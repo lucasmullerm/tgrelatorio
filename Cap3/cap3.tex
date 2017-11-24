@@ -1,5 +1,38 @@
+\label{cap:analise}
+\section{Tecnologias Utilizadas}
+
+Neste trabalho, foram utilizadas algumas tecnologias e ferramentas que favoreceram e auxiliaram no desenvolvimento.
+
+\subsection{Python 3}
+
+Python é uma linguagem de programação de alto nível, com modelo de desenvolvimento aberto. \cite{python}. Surgiu em 1991 e tem se popularizado pela sua facilidade de aprendizado e simplicidade para implementação de scripts, análises e processamento de dados.
+
+Este trabalho utilizou-se de uma das versões mais recentes da linguagem, que é a versão 3.5.3 (Setembro, 2017). 
+
+\subsection{music21}
+
+Uma biblioteca que contém diversas implementações que auxiliam no estudo da música. \cite{music21}.
+Ela foi utilizada para auxiliar na leitura e formatação dos arquivos \textit{MIDI}, assim como o pré-processamento dos dados obtidos destes arquivos.
+
+A biblioteca ainda provê implementação de alguns algoritmos que auxiliam na detecção do tom ou escala em que a composição foi escrita.
+
+\subsection{Jupyter}
+
+Trata-se de um projeto aberto e sem fins lucrativos que auxilia em computações científicas e de processameneto de dados e provê uma interface interativa.
 
 
+% ===============================================================
+\section{Desenvolvimento}
+
+A \textit{framework} desenvolvida é composta por três módulos principais:
+
+\begin{itemize}
+    \item \textit{probability.py}: Realiza as análises de frequência de uma composição musical para todos os modelos citados no \ref{cap:metodo}
+    \item \textit{entropy.py}: Realiza os cálculos de entropia média e no instante para uma composição.
+    \item \textit{graphs.ipynb}: \textit{Jupyter notebook} que gera os gráficos para as análises que serão mostradas a seguir
+\end{itemize}
+
+% ===============================================================
 \section{Evolução}
 
 O objetivo desta seção é tentar retratar uma evolução da música internacional ao longo dos anos; desde artistas clássicos até os mais modernos. Foram utilizadas 57 composições de um total de 12 artistas e bandas. A composição mais antiga data de 1784 e a mais recente, de 2014. Os artistas utilizados, juntamente com os anos de atividade, são:
