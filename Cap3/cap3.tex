@@ -1,17 +1,38 @@
-% \section{Controle combinado}
-% Conforme vimos na seção \ref{ectq3} podemos controlar um sistema nao linear como  através da técnica do torque computado, usando um controlador PD dado por:
-% \begin{equation} \label{ectq3}
-% \tau'=\ddot{q}_d+K_v(\dot{q}_d-\dot{q})+K_p(q_d-q) \; ,
-% \end{equation}
-% sendo $q_{d}$, $\dot{q}_{d}$ e $\ddot{q}_{d}$ a posição desejada, a velocidade desejada e a aceleração desejada; $K_p$
-% e $K_v$ são matrizes diagonais $n \times n$, sendo que cada elemento da diagonal é um ganho positivo e escalar.
 
-% Aqui $M_{est}$ e $b_{est}$ são modelos estimados da matriz de inércia, $M$, e do vetor de torques não inerciais, $b$, do robô real,  respectivamente. A equação de malha fechada do sistema é:
-% \begin{equation} \label{ectq4}
-% \ddot{e}+K_v\dot{e}+K_pe=M_{est}^{-1}[(M-M_{est})\ddot{q}+(b-b_{est})] \; .
-% \end{equation}
 
-% Em um manipulador real, podem existir distúrbios externos tais como atrito, variação de torque dos atuadores, e perturbações em virtude  das cargas no robô. Se a soma destes distúrbios for definida como $d_{ext}$ e adicionada à (\ref{ectq4}), teremos
-% \begin{equation} \label{ectq5}
-% \ddot{e}+K_v\dot{e}+K_pe=M_{est}^{-1}[(M-M_{est})\ddot{q}+(b-b_{est})+d_{ext}] \; .
-% \end{equation}
+\section{Evolução}
+
+O objetivo desta seção é tentar retratar uma evolução da música internacional ao longo dos anos; desde artistas clássicos até os mais modernos. Foram utilizadas 57 composições de um total de 12 artistas e bandas. A composição mais antiga data de 1784 e a mais recente, de 2014. Os artistas utilizados, juntamente com os anos de atividade, são:
+
+\begin{itemize}
+    \item Wolfgang Amadeus Mozart (1761 - 1791) \cite{midiworld}
+    \item Niccolò Paganini (1793 - 1840) \cite{midimelody}
+    \item Frédéric François Chopin (1818 - 1849) \cite{midiworld}
+    \item Sergei Vasilievich Rachmaninoff (1877 - 1943) \cite{midiworld}
+    \item Scott Joplin (1895 - 1917) \cite{trachtman}
+    \item Duke Ellington (1914 - 1974) \cite{midimelody}
+    \item Elvis Presley (1953 - 1977) \cite{midiworld}
+    \item Antônio Carlos Jobim (1956 - 1994) \cite{wersi}
+    \item The Beattles (1960 - 1970) \cite{midiworld}
+    \item Pink Floyd (1965 - 1995, 2005, 2012 - 2014) \cite{midiworld}
+    \item Dream Theater (1985 - Atualmente) \cite{freemidi}
+    \item Taylor Swift (2004 - Atualmente) \cite{freemidi}
+\end{itemize}
+A figura
+% \ref{fig:evo}
+mostra o valor médio de entropia de cada composição utilizando como evento o TODO: (nota, cond, dist ou dur). O valor de cada composição está representado com um círculo e o valor médio por artista está representado com um $X$. 
+
+TODO: INSERIR FIGURA
+
+A figura
+% \ref{fig:artists}
+mostra o valor médio por artista e também apresenta uma escala mais precisa no eixo da entropia.
+
+TODO: INSERIR FIGURA
+
+Nota-se uma pequena difereça entre os compositores mais clássicos (porção mais à esquerda) em relação aos artistas mais modernos, tendo os primeiros valores mais elevados de entropia. Nota-se também que os artistas que 
+
+Para uma comparação mais precisa, as tabelas de
+% \ref{tab:mozart} até % \ref{tab:taylor}
+mostram os valores de entropia calculados para cada uma das composições em cada um dos modelos já citatos no capítulo \ref{cap:metodo}.
+% \input{Cap3/tabs}
