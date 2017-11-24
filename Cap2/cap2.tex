@@ -1,7 +1,7 @@
 \label{cap:metodo}
 \section{Notação Musical}
 
-Para este trabalho será necessário que um conhecimento prévio de teoria e notação musical moderna. O conhecimento básico necessário para o entendimento do que será exposto a seguir está no Apêndice \ref{ape:notacao}.
+Para este trabalho será necessário um conhecimento prévio de teoria e notação musical moderna. O conhecimento básico necessário para o entendimento do que será exposto a seguir está no Apêndice \ref{ape:notacao}.
 Digitalmente, as composições podem ser representadas pelo padrão MIDI.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,17 +13,31 @@ O padrão MIDI representa, em 7 bits, as notas das oitavas $-1$ a $9$, que abran
 
 A existência de softwares que convertem do padrão MIDI para padrões mais amigáveis a humanos permite que as composições musicais sejam transcritas para esse padrão e disponibilizadas facilmente \textit{online}. Estes softwares são chamados de sequenciadores. Dois desses softwares foram utilizados no decorrer deste trabalho: Online Sequencer \cite{sequencer} e MuseScore \cite{musescore}, sendo o segundo mais completo e que permite a rápida transcrição do arquivo MIDI em partitura.
 
+É o padrão mais natural a ser escolhido como entrada das análises que foram feitas neste trabalho pois consegue representar digitalmente de forma simples o que é exposto em uma partitura. Há ainda bibliotecas, como \textit{music21}, que auxiliam na leitura desses arquivos e processamento para que seja fácil utilização.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Processo Estocástico}
-[ Falar sobre um pouco sobre processo estocástico ]
+\section{Fundamentação Teórica}
+\subsection{Variáveis aleatórias}
+\label{sec:prob}
 
+É a variável cujos valores possíveis são os resultados numéricos de um fenômemo aleatório. Uma variável aleatório discreta é aquela que pode assumir apenas uma quantidade discreta e finita de valores. \cite{estocastico}.
+
+No contexto deste trabalho, cada instante de uma música pode ser modelado como um conjunto de variáveis aleatórias discretas. Uma delas representa o som que está sendo emitido. Isto pode ser representado de 3 formas distintas:
+
+\begin{itemize}
+    \item Nota, acorde ou pausa;
+    \item Par de notas emitidos no instante atual e no anterior;
+    \item Distância da nota atual para a nota anterior.
+\end{itemize}
+
+A segunda variável aleatória é a duração do evento descrito anteriormente.
+
+A função de probabilidade $P(X)$ é aquela que descreve a lista de probabilidades para cada um dos valores possíveis para o evento observado. Neste trabalho, esta função, para todos os modelos descritos, pode ser obtida através de uma análise de frequência da composição a ser analisada.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Entropia}
+\subsection{Entropia}
 
-
-Entropia da informação é definida textcomo a quantidade de informação produzida por um processo estocástico. É a grandeza que procura medir a incerteza ou a taxa na qual informação é gerada ou transmitida.
+Entropia da informação é definida como a quantidade de informação produzida por um processo estocástico. É a grandeza que procura medir a incerteza ou a taxa na qual informação é gerada ou transmitida.
 
 Considerando um evento $X$ que pode assumir os valores ${x_1, x_2, ..., x_n}$, onde se conhece a probabilidade $P(x_i)$ para cada valor, pretende-se medir quanta informação é transmitida por cada valor. Para isso, deve-se encontrar uma função $H(X)$ com as seguintes propriedades \cite{shannon}:
 
@@ -41,10 +55,23 @@ A função $H$, entropia de X, que satisfaz as propriedades é \cite{shannon}:
 \end{equation}
 $K$ é uma constante positiva que define a unidade. Será usado o valor $K=1$ aqui em diante. Será utilizado, também, $b=2$. Assim, temos o resultado em bits.
 
-[ TODO: Falar de propriedades ]
+Algumas propriedades da função de entropia são \cite{livro}:
+
+\begin{enumerate}
+    \item $H(X) \geq 0$
+    \item $H(X|Y) \leq H(X)$. O condicionamento de duas variáveis diminui a entropia. A igualdade ocorre quando X e Y são independentes.
+    \item $H(X, Y) \leq H(X) + H(Y)$. Igualdade ocorre quando $X$ e $Y$ são independentes.
+\end{enumerate}
+
+Pode-se ainda calcular a entropia no instante da música, isto é, a quantidade de bits necessária para se transmitir o evento em cada instante da música. Este valor pode ser dado por:
+
+\begin{equation}
+    H_X(t) = - \log_2{P_X(x_t)} 
+\end{equation}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Entropia Condicional}
+\subsection{Entropia Condicional}
 
 Pode-se definir Entropia Conjunta de duas variáveis aleatórias $X$ e $Y$ da mesma forma expressa na equação \ref{eq:entropy}, utilizando $(X, Y)$ como uma única variável aleatória vetorial. Já utilizando os valores definidos para $K$ e $b$ temos \cite{livro}:
 
@@ -72,16 +99,15 @@ A partir do valor da função de probabilidade conjunta $P(X,Y)$, pode-se calcul
 \end{equation}
 
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Informação Mútua}
+\subsection{Informação Mútua}
 
-É possivel, também, que estude a variável $X$ condicionalmente a outra variável aleatória $Y$. Assim, pode-se calcular a Entropia de $X$ quando se conhece $Y$:
+Informação Mútua é a entropia relativa entre a distribuição conjunta $P(X,Y)$ e o produto das distribuições $P(X)$ e $P(Y)$. \cite{livro}
+
+Através desta definição, da equação \ref{eq:joint_entropy} e do Teorema de Bayes \cite{bayes} temos:
 
 \begin{equation}
-    H(X|Y) =  \sum_{j=1}^{m} P_Y(y_i) H(X|Y = y_i)
+    I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)
 \end{equation}
 
 
@@ -99,29 +125,18 @@ Ao realizar o pré-processamento da composição, foram feitas algumas considera
 
 \subsection{Extração da Melodia}
 
-Tanto as composições musicais mais clássicas como as mais modernas apresentam diversos instrumentos ou vozes simultaneamente. Dentre as mais clássicas, as mais simples apresentam duas sequências principais:
-
-\begin{itemize}
-    \item Base
-    \item Melodia
-\end{itemize}
-
-No caso de composições mais modernas, há a presença de vários instrumentos musicais, dentre eles:
-
-\begin{itemize}
-    \item Voz
-    \item Guitarra
-    \item Violão
-    \item Piano
-    \item Contrabaixo
-    \item Bateria / Percussão
-\end{itemize}
+Tanto as composições musicais mais clássicas como as mais modernas apresentam diversos instrumentos ou vozes simultaneamente. Cada instrumento desempenha um papel diferente e devemos, então, escolher os mais adequados à nossa análise.
 
 Para propósitos deste trabalho, foi feita a extração apenas da sequência principal, ou melodia, de cada uma das composições utilizadas. Essa extração foi feita utilizando o software MuseScore \cite{musescore}, que permite a vizualização de arquivos MIDI em formato mais amigável para um humano, assim como edição dos mesmos.
 
-% \subsection{Modo}
 
-% Outro fator a se considerar o modo das escalas, que pode ser maior, menor, dentre outros. Nesse trabalho, foram considerados os modos maior e menor apenas. A separação aqui é feita pois há uma diferença entre o significado de uma sequência de notas em uma escala devido ao seu modo, por exemplo, a sequência $C$,$E$, $G$ representa coisas diferntes nas escalas de Dó Maior ou Dó Menor.
+\subsection{Função probabilidade}
+
+Para as análises de entropia é necessário que estabeleçamos a função de distribuição de probabilidade $P(X)$ dos eventos que serão analisados. Esse valor foi obtido experimentalmente através de análise de frequência das composições que foram estudadas.
+
+Foi obtido o valor da função para todos os modelos citados na seção \ref{sec:prob}.
+
+As simplificações adotadas no processamento das sequências estão expostas a seguir.
 
 \subsection{Altura da nota}\label{section:altura_da_nota}
 
@@ -139,10 +154,6 @@ Para os acordes, foi tomada duas abordagens diferentes:
 
 As notas de mesmo nome observadas em escalas diferentes foram tratadas com o mesmo valor, por exemplo, a nota Dó foi tratada com o mesmo valor se está na primeira oitava ($C1$) ou na quarta oitava ($C4$). Isto deve-se ao fato de que, em uma mesma escala, as notas de mesmo nome em oitavas diferentes carregam, muitas vezes, a mesma informação.
 
-\subsection{Função probabilidade}
-
-Para as análises de entropia é necessário que estabeleçamos a função de distribuição de probabilidade $P(X)$ dos eventos que serão analisar. Esse valor foi obtido experimentalmente através de análise de frequência das composições que foram estudadas.
-
 \subsection{Distâncias entre notas consecutivas}
 
 Para a análise com a utilização do evento Distância entre notas consecutivas foram tomadas duas abordagens:
@@ -159,4 +170,8 @@ A duração dos eventos foi tratada como uma variável aleatória independente d
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Método de Análise}
 
+Após o pré-processamento dos dados e simplificações mencionadas, se obtém os valores para a função de probabilidade para os modelos citados na seção \ref{sec:prob}.
 
+Calculada a função de probabilidade, pode-se calcular os valores de entropia média para as composições, assim como os valores de entropia para cada instante. 
+
+Outros valores e comparações serão introduzidos no próximo capítulo, como, por exemplo, a entropia média por compasso.
